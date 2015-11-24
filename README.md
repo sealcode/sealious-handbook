@@ -138,9 +138,9 @@ We will use `field-type.color` for this example.
     1   var Sealious = require("sealious");
     2
     3   new Sealious.ChipTypes.FieldType({
-    4       name: "color",
-    5       is_proper_value: function(accept, reject, context, params, new_value){
-    6
+    4       name: "color", // important! This is the name of your field-type
+    5       is_proper_value: function(accept, reject, context, params, new_value){ 
+    6           // checks if `new_value` correct. If not, it rejects the request.
     7       }
     8   });
     ```
@@ -153,19 +153,20 @@ In this example we will use a module from `npm` called `color`.
     2   var Color = require("color");
     3
     4   new Sealious.ChipTypes.FieldType({
-    5       name: "color",
+    5       name: "color", // important! This is the name of your field-type
     6       is_proper_value: function(accept, reject, context, params, new_value){
-    7           try {
-    8               if (typeof (new_value) === "string")
-    9                   Color(new_value.toLowerCase());
-    10              else
-    11                  Color(new_value);
-    12          } catch (e){
-    13              reject("Value `" + new_value + "` could not be parsed as a color.");
-    14          }
-    15          accept();
-    16      },
-    17  });
+    7          // checks if `new_value` correct. If not, it rejects the request.
+    8           try {
+    9               if (typeof (new_value) === "string")
+    10                   Color(new_value.toLowerCase());
+    11              else
+    12                  Color(new_value);
+    13          } catch (e){
+    14              reject("Value `" + new_value + "` could not be parsed as a color.");
+    15          }
+    16          accept();
+    17      },
+    18  });
     ```
 And now, `is_proper_value` will accept those colors, that can be parsed correctly by `color` module. If the parsing cannot be done, the method will reject the `new_value` argument.
 
@@ -183,18 +184,19 @@ So the safer approach would be parsing the colors to one, standarized form. This
 2   var Color = require("color");
 3
 4   new Sealious.ChipTypes.FieldType({
-5       name: "color",
+5       name: "color", // important! This is the name of your field-type
 6       is_proper_value: function(accept, reject, context, params, new_value){
-7           try {
-8               if (typeof (new_value) === "string")
-9                   Color(new_value.toLowerCase());
-10              else
-11                  Color(new_value);
-12          } catch (e){
-13              reject("Value `" + new_value + "` could not be parsed as a color.");
-14          }
-15          accept();
-16      },
+7            // checks if `new_value` correct. If not, it rejects the request.
+8           try {
+9               if (typeof (new_value) === "string")
+10                  Color(new_value.toLowerCase());
+11              else
+12                  Color(new_value);
+13          } catch (e){
+14              reject("Value `" + new_value + "` could not be parsed as a color.");
+15          }
+16          accept();
+17      },
 18      encode: function(context, params, value_in_code){
 19          var color = Color(value_in_code);
 20          return color.hexString();
@@ -228,7 +230,7 @@ Error: In declaration of resource type 'person': unknown field type 'my-new-fiel
 2. Did you remember to include `name` property in your field-type declaration?
     ```js
     new Sealious.ChipTypes.FieldType({
-        name: "my-new-field-type",
+        name: "my-new-field-type", // important! This is the name of your field-type
         //rest of the declaration
     });
     ```
@@ -242,6 +244,7 @@ Error: In declaration of resource type 'person': unknown field type 'my-new-fiel
 **A**: Make sure that in your field-type declaration, the `is_proper_value` method uses `accept()` argument.
 ```js
 is_proper_value: function(accept, reject, context, params, number){
+    // checks if `new_value` correct. If not, it rejects the request.
     var test = parseFloat(number);
     if (test === null || test === NaN || isNaN(number) === true) {
         reject("Value `" + number + "` is not a float number format.");
@@ -250,6 +253,7 @@ is_proper_value: function(accept, reject, context, params, number){
     }
 }
 ```
+
 
 ---
 
