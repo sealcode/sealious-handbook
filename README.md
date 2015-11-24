@@ -246,7 +246,7 @@ is_proper_value: function(accept, reject, context, params, number){
     if (test === null || test === NaN || isNaN(number) === true) {
         reject("Value `" + number + "` is not a float number format.");
     } else {
-        accept();
+        accept(); // remember to add this
     }
 }
 ```
@@ -265,7 +265,9 @@ File `/lib/base-chips/_base-chips.js` contains a list of currently used field-ty
 
 To solve this problem, make sure that Sealious first loads that existing field-type, and then yours:
 ```js
-require("./already-existing-field-type.js")
-require("./your-field-type.js");
+// some requires
+require("./already-existing-field-type.js") // this is above your field-type
+require("./your-field-type.js"); // this is your field-type
+// some requires
 ```
 
