@@ -7,16 +7,7 @@ A field-type can accept or reject a value, with appropriate error message.
 
 It's a field-type's responsibility to describe how to store it's values in a datatore.
 
-Some field-types that come bundled with Sealious:
-
- * `text` - for storing strings of chars.
- * `email` - like text, but accepts only valid email addresses as values
- * `int` - for storing integer numbers
- * `float` - for storing real numbers
- * `file` - for storing managed user-submitted files
- * `reference` - for storing a reference to a resource. This field-type can be adjusted to only accept references to certain resource types.
-
- File `lib/base-chips/_base-chips.js` defines the order field-type initilizing.
+File `lib/base-chips/_base-chips.js` defines the order of field-type initilizing.
 
 #### II. How to use field-types?
 The example below shows a simple Sealious app:
@@ -68,7 +59,14 @@ Every field can have `params` object to specify what values can be accepted and 
 ```
 
 This line tells us, that you can send HTTP requests on url `/api/v1`. 
-This means that you can send, for example, HTTP POST request on (deafult) URL `http://localhost/api/v1/person` with this body:
+This means that you can send, for example, HTTP POST request on (deafult) URL `http://localhost/api/v1/person` with body:
+
+ * `name: Maurice`,
+ * `age: 21`,
+ * `hair-color: blue`,
+
+because of the fields defined in our app.
+
 ![HTTP POST request](http_post.png)
 
 Sending this request will result in adding a new user named **Maurice**, who is **21** years old and has **blue** hair color to the database.
@@ -140,11 +138,11 @@ We will use `field-type.color` for this example.
     3   new Sealious.ChipTypes.FieldType({
     4       name: "color", // important! This is the name of your field-type
     5       is_proper_value: function(accept, reject, context, params, new_value){ 
-    6           // checks if `new_value` correct. If not, it rejects the request.
+    6           // checks if `new_value` is correct. If not, it rejects the request.
     7       }
     8   });
     ```
-*Note*: `is_proper_value` method checks if `new_value` correct. If not, it rejects the request.
+*Note*: `is_proper_value` method checks if `new_value` is correct. If not, it rejects the request.
 
 5. Since we want to create a field-type that will accept colors, we have to implement `is_proper_value` method properly, so that it will accepts values like `"black"` or `"#123FA5"` and reject values like `"silly sealy"`.
 In this example we will use a module from `npm` called `color`.
@@ -155,7 +153,7 @@ In this example we will use a module from `npm` called `color`.
     4   new Sealious.ChipTypes.FieldType({
     5       name: "color", // important! This is the name of your field-type
     6       is_proper_value: function(accept, reject, context, params, new_value){
-    7          // checks if `new_value` correct. If not, it rejects the request.
+    7          // checks if `new_value` is correct. If not, it rejects the request.
     8           try {
     9               if (typeof (new_value) === "string")
     10                   Color(new_value.toLowerCase());
@@ -170,12 +168,18 @@ In this example we will use a module from `npm` called `color`.
     ```
 And now, `is_proper_value` will accept those colors, that can be parsed correctly by `color` module. If the parsing cannot be done, the method will reject the `new_value` argument.
 
-6. Voila! We have created a new field-type that accepts colors! Is it all?
+6. Voila! We have created a new field-type that accepts colors! 
 
-Well, we can add `encode` method, which transforms (or encodes) the value that was given to `is_proper_value` to what we want. 
+---
+
+**Q**: Is it all?
+
+**A**: Yes, this is how you create a new field-type. But there **can** be more to it.
+
+We can add `encode` method, which transforms (or encodes) the value that was given to `is_proper_value` to what we want. 
 
 
-Let's say we want to store some colors in the database. This may be troublesome, because some colors can be named explicitly `black`, some can be rgb objects like `{r: 10, g: 2, b: 200}` and some can have hex values like `"#115DFA"`. This could be a mess!
+Let's say, for the sake of our example, that we want to store some colors in the database. This may be troublesome, because some colors can be named explicitly `black`, some can be rgb objects like `{r: 10, g: 2, b: 200}` and some can have hex values like `"#115DFA"`. This could be a mess!
 
 
 So the safer approach would be parsing the colors to one, standarized form. This is what `encode` ensures.
@@ -186,7 +190,7 @@ So the safer approach would be parsing the colors to one, standarized form. This
 4   new Sealious.ChipTypes.FieldType({
 5       name: "color", // important! This is the name of your field-type
 6       is_proper_value: function(accept, reject, context, params, new_value){
-7            // checks if `new_value` correct. If not, it rejects the request.
+7            // checks if `new_value` is correct. If not, it rejects the request.
 8           try {
 9               if (typeof (new_value) === "string")
 10                  Color(new_value.toLowerCase());
@@ -205,6 +209,7 @@ So the safer approach would be parsing the colors to one, standarized form. This
 ```
 And that's it. Now you can use `color` as a field-type in your app field delcaration.
 
+---
 
 #### V. Common questions and errors
 
