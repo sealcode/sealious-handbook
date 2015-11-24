@@ -117,57 +117,57 @@ We will use `field-type.color` for this example.
 
 1. Create your field-type file in `lib/base-chips/`.
 2. Add reference to `lib/base-chips/_base-chips.js`:
-```js
-// some requires...
-require("./field_type.color.js");
-require("./field_type.file.js");
-require("./your-new-field-type.js") // add this
-// some requires...
-```
+    ```js
+    // some requires...
+    require("./field_type.color.js");
+    require("./field_type.file.js");
+    require("./your-new-field-type.js") // add this
+    // some requires...
+    ```
 
 3. Write the skeleton of your new field-type.
-```js
-1   var Sealious = require("sealious");
-2
-3   new Sealious.ChipTypes.FieldType({
-4        
-5   });
-```
+    ```js
+    1   var Sealious = require("sealious");
+    2
+    3   new Sealious.ChipTypes.FieldType({
+    4        
+    5   });
+    ```
 
 4. The most basic form of field-type consists of `name` property and `is_proper_value` method. Let's add them!
-```js
-1   var Sealious = require("sealious");
-2
-3   new Sealious.ChipTypes.FieldType({
-4       name: "color",
-5       is_proper_value: function(accept, reject, context, params, new_value){
-6
-7       }
-8   });
-```
+    ```js
+    1   var Sealious = require("sealious");
+    2
+    3   new Sealious.ChipTypes.FieldType({
+    4       name: "color",
+    5       is_proper_value: function(accept, reject, context, params, new_value){
+    6
+    7       }
+    8   });
+    ```
 *Note*: `is_proper_value` method checks if `new_value` correct. If not, it rejects the request.
 
 5. Since we want to create a field-type that will accept colors, we have to implement `is_proper_value` method properly, so that it will accepts values like `"black"` or `"#123FA5"` and reject values like `"silly sealy"`.
 In this example we will use a module from `npm` called `color`.
-```js
-1   var Sealious = require("sealious");
-2   var Color = require("color");
-3
-4   new Sealious.ChipTypes.FieldType({
-5       name: "color",
-6       is_proper_value: function(accept, reject, context, params, new_value){
-7           try {
-8               if (typeof (new_value) === "string")
-9                   Color(new_value.toLowerCase());
-10              else
-11                  Color(new_value);
-12          } catch (e){
-13              reject("Value `" + new_value + "` could not be parsed as a color.");
-14          }
-15          accept();
-16      },
-17  });
-```
+    ```js
+    1   var Sealious = require("sealious");
+    2   var Color = require("color");
+    3
+    4   new Sealious.ChipTypes.FieldType({
+    5       name: "color",
+    6       is_proper_value: function(accept, reject, context, params, new_value){
+    7           try {
+    8               if (typeof (new_value) === "string")
+    9                   Color(new_value.toLowerCase());
+    10              else
+    11                  Color(new_value);
+    12          } catch (e){
+    13              reject("Value `" + new_value + "` could not be parsed as a color.");
+    14          }
+    15          accept();
+    16      },
+    17  });
+    ```
 And now, `is_proper_value` will accept those colors, that can be parsed correctly by `color` module. If the parsing cannot be done, the method will reject the `new_value` argument.
 
 6. Voila! We have created a new field-type that accepts colors! Is it all?
@@ -176,30 +176,29 @@ Well, we can add `encode` method, which transforms (or encodes) the value that w
 Let's say we want to store some colors in the database. This may be troublesome, because some colors can be named explicitly `black`, some can be rgb objects like `{r: 10, g: 2, b: 200}` and some can have hex values like `"#115DFA"`. This could be a mess!
 
 So the safer approach would be parsing the colors to one, standarized form. This is what `encode` ensures.
-
-```js
-1   var Sealious = require("sealious");
-2   var Color = require("color");
-3
-4   new Sealious.ChipTypes.FieldType({
-5       name: "color",
-6       is_proper_value: function(accept, reject, context, params, new_value){
-7           try {
-8               if (typeof (new_value) === "string")
-9                   Color(new_value.toLowerCase());
-10              else
-11                  Color(new_value);
-12          } catch (e){
-13              reject("Value `" + new_value + "` could not be parsed as a color.");
-14          }
-15          accept();
-16      },
-18      encode: function(context, params, value_in_code){
-19          var color = Color(value_in_code);
-20          return color.hexString();
-21      }
-22  });
-```
+    ```js
+    1   var Sealious = require("sealious");
+    2   var Color = require("color");
+    3
+    4   new Sealious.ChipTypes.FieldType({
+    5       name: "color",
+    6       is_proper_value: function(accept, reject, context, params, new_value){
+    7           try {
+    8               if (typeof (new_value) === "string")
+    9                   Color(new_value.toLowerCase());
+    10              else
+    11                  Color(new_value);
+    12          } catch (e){
+    13              reject("Value `" + new_value + "` could not be parsed as a color.");
+    14          }
+    15          accept();
+    16      },
+    18      encode: function(context, params, value_in_code){
+    19          var color = Color(value_in_code);
+    20          return color.hexString();
+    21      }
+    22  });
+    ```
 And that's it. Now you can use `color` as a field-type in your app field delcaration.
 
 
