@@ -218,9 +218,11 @@ Error: In declaration of resource type 'person': unknown field type 'my-new-fiel
 
 1. Did you remember to add your new field-type reference to `/lib/base-chips/_base-chips.js`? It should look like this:
     ```js
+    // some requires
     require("./field_type.color.js");
     require("./field_type.file.js");
-    require("./your-new-field-type.js")
+    require("./your-new-field-type.js") // your field-type
+    // some requires
     ```
 
 2. Did you remember to include `name` property in your field-type declaration?
@@ -238,24 +240,24 @@ Error: In declaration of resource type 'person': unknown field type 'my-new-fiel
 **Q**: *I used my new field-type in my app declaration, everything is okay when the app starts, but when I try to use HTTP POST request, nothing happens. No error, no response, nothing.*
 
 **A**: Make sure that in your field-type declaration, the `is_proper_value` method uses `accept()` argument.
-    ```js
-    is_proper_value: function(accept, reject, context, params, number){
-        var test = parseFloat(number);
-        if (test === null || test === NaN || isNaN(number) === true) {
-            reject("Value `" + number + "` is not a float number format.");
-        } else {
-            accept();
-        }
+```js
+is_proper_value: function(accept, reject, context, params, number){
+    var test = parseFloat(number);
+    if (test === null || test === NaN || isNaN(number) === true) {
+        reject("Value `" + number + "` is not a float number format.");
+    } else {
+        accept();
     }
-    ```
+}
+```
 
 ---
 
 
 **Q**: *I try to create a new field-type that inherits (extends) from an already-existing field-type. I added the reference to `/lib/base-chips/_base-chips.js`, but all I get is this error:*
-    ```
-    Error: ChipManager was asked to return a chip of type `field_type` and name `<already-existing-field-type>`, but it was not found
-    ```
+```
+Error: ChipManager was asked to return a chip of type `field_type` and name `<already-existing-field-type>`, but it was not found
+```
 
 **A**: Okay, so I assume you are sure, that this already-existing field-type indeed exists and is referenced in `/lib/base-chips/_base-chips.js`. 
 
