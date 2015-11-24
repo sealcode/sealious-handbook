@@ -172,7 +172,7 @@ And now, `is_proper_value` will accept those colors, that can be parsed correctl
 
 ---
 
-**Q**: Is it all?
+**Q**: *Is it all?*
 
 **A**: Yes, this is how you create a new field-type. But there **can** be more to it.
 
