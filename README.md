@@ -209,10 +209,10 @@ And that's it. Now you can use `color` as a field-type in your app field delcara
 ---
 
 **Q**: *I created a new field-type, I want to use it in my app, but when I create a new field with my field-type and start the app, I get this error:*
-    ```js
-    Error: In declaration of resource type 'person': unknown field type 'my-new-field-type' in field 'name'.
+```js
+Error: In declaration of resource type 'person': unknown field type 'my-new-field-type' in field 'name'.
 
-    ```
+```
 
 **A**: There are several causes that may throw this error (**not** including typos):
 
