@@ -117,13 +117,13 @@ We will use `field-type.color` for this example.
 
 1. Create your field-type file in `lib/base-chips/`.
 2. Add reference to `lib/base-chips/_base-chips.js`:
-    ```js
-    // some requires...
-    require("./field_type.color.js");
-    require("./field_type.file.js");
-    require("./your-new-field-type.js") // add this
-    // some requires...
-    ```
+```js
+// some requires...
+require("./field_type.color.js");
+require("./field_type.file.js");
+require("./your-new-field-type.js") // add this
+// some requires...
+```
 
 3. Write the skeleton of your new field-type.
 ```js
