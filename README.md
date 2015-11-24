@@ -54,11 +54,13 @@ Every field can have `params` object to specify what values can be accepted and 
 
 
 **Q**: *But how can I actually use those field-types?*
+
 **A**: Good question. Let's take a look at line **14**. 
 
 This line tells us, that you can send HTTP requests on url `/api/v1`. 
 This means that you can send, for example, HTTP POST request on (deafult) URL `http://localhost/api/v1/person` with this body:
 ![HTTP POST request](http_post.png)
+
 This will add a new user named **Maurice**, who is **21** years old and has **blue** hair color to the database.
 
 #### III. Field-types in Sealious
@@ -81,8 +83,9 @@ Sealious comes with 11 pre-defined field-types:
 #### V. Common questions and errors
 
 **Q**: I created a new field-type, I want to use it in my app, but when I create a new field with my field-type and start the app, I get this error:
-    ```
+    ```js
     Error: In declaration of resource type 'person': unknown field type 'my-new-field-type' in field 'name'.
+    
     ```
 
 **A**: There are several causes that may throw this error (**not** including typos):
