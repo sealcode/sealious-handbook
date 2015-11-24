@@ -172,9 +172,7 @@ And now, `is_proper_value` will accept those colors, that can be parsed correctl
 
 6. Voila! We have created a new field-type that accepts colors! Is it all?
 Well, we can add `encode` method, which transforms (or encodes) the value that was given to `is_proper_value` to what we want. 
-
 Let's say we want to store some colors in the database. This may be troublesome, because some colors can be named explicitly `black`, some can be rgb objects like `{r: 10, g: 2, b: 200}` and some can have hex values like `"#115DFA"`. This could be a mess!
-
 So the safer approach would be parsing the colors to one, standarized form. This is what `encode` ensures.
     ```js
     1   var Sealious = require("sealious");
