@@ -32,20 +32,20 @@ The example below shows a simple Sealious app:
 
 Several things to note:
 
-1. As you can see, there are *three* fields declared:
+1. There are *three* fields declared:
     * `name`, which is of `text` type,
     * `age`, which is of `int` type,
     * `hair-color`, which is of `color` type.
 
-2. Each field has a type assigned which describes how the field behaves and what value it contains. 
+2. Each field-type describes how the field behaves and what value it contains. 
 For example, `field-type.color` accepts values like:
     * `"black"`, 
     * `"#000000"`, 
     * `{r: 0, g: 0, b: 0}`,
-but rejects values such as `"this is my color"`.
+    but rejects values such as `"this is my color"`.
 
 3. Field `name` has defined an object called `params`, which provides additional information about the field-type. 
-In this case, `name` can have no more than `120` characters.
+In this case, `name` can have no more than `25` characters.
 Every field can have `params` object to specify what values can be accepted and what rejected.
 
 ---
@@ -70,8 +70,6 @@ because of the fields defined in our app.
 ![HTTP POST request](http_post.png)
 
 Sending this request will result in adding a new user named **Maurice**, who is **21** years old and has **blue** hair color to the database.
-
----
 
 #### III. Field-types in Sealious
 Sealious comes with *eleven* pre-defined field-types:
@@ -176,13 +174,17 @@ And now, `is_proper_value` will accept those colors, that can be parsed correctl
 
 **A**: Yes, this is how you create a new field-type. But there **can** be more to it.
 
-We can add `encode` method, which transforms (or encodes) the value that was given to `is_proper_value` to what we want. 
+Let's say, that we want to store some colors in the database. This may be troublesome, because of several ways to define a color:
+
+* `black` (explicitly), 
+* `{r: 10, g: 2, b: 200}` (RGB object),
+* `"#115DFA"` (hex value).
 
 
-Let's say, for the sake of our example, that we want to store some colors in the database. This may be troublesome, because some colors can be named explicitly `black`, some can be rgb objects like `{r: 10, g: 2, b: 200}` and some can have hex values like `"#115DFA"`. This could be a mess!
+So the safer approach would be parsing the colors to one, standarized form. 
 
+This is what `encode` ensures - it transforms (or encodes) the value that was given to `is_proper_value` to what we want. 
 
-So the safer approach would be parsing the colors to one, standarized form. This is what `encode` ensures.
 ```js
 1   var Sealious = require("sealious");
 2   var Color = require("color");
@@ -209,13 +211,10 @@ So the safer approach would be parsing the colors to one, standarized form. This
 ```
 And that's it. Now you can use `color` as a field-type in your app field delcaration.
 
----
 
 #### V. Common questions and errors
 
----
-
-**Q**: *I created a new field-type, I want to use it in my app, but when I create a new field with my field-type and start the app, I get this error:*
+**Q**: *I created a new field-type and I want to use it in my app. But when I create a new field with my field-type and start the app, I get this error:*
 ```js
 Error: In declaration of resource type 'person': unknown field type 'my-new-field-type' in field 'name'.
 
@@ -223,7 +222,7 @@ Error: In declaration of resource type 'person': unknown field type 'my-new-fiel
 
 **A**: There are several causes that may throw this error (**not** including typos):
 
-1. Did you remember to add your new field-type reference to `/lib/base-chips/_base-chips.js`? It should look like this:
+1. Did you remember to add your new field-type reference to `/lib/base-chips/_base-chips.js`? 
     ```js
     // some requires
     require("./field_type.color.js");
@@ -268,11 +267,9 @@ is_proper_value: function(accept, reject, context, params, number){
 Error: ChipManager was asked to return a chip of type `field_type` and name `<already-existing-field-type>`, but it was not found
 ```
 
-**A**: Okay, so I assume you are sure, that this already-existing field-type indeed exists and is referenced in `/lib/base-chips/_base-chips.js`. 
+**A**: File `/lib/base-chips/_base-chips.js` contains a list of currently used field-types. Those field-types are loaded one after another, sequentially. This error occurs, when you want to load your field-type **before** the already existing field-type you want to inherit from.
 
-File `/lib/base-chips/_base-chips.js` contains a list of currently used field-types. Those field-types are loaded one after another, sequentially. This error occurs, when you want to load your field-type **before** the already existing field-type you want to inherit from.
-
-To solve this problem, make sure that Sealious first loads that existing field-type, and then yours:
+Make sure that Sealious **first** loads that existing field-type, and **then** yours:
 ```js
 // some requires
 require("./already-existing-field-type.js") // this is above your field-type
