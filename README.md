@@ -109,8 +109,6 @@ Sealious comes with *eleven* pre-defined field-types:
 In this section we will show you step by step how to create your own field-type.
 We will use `field-type.color` for this example.
 
-**Ready?**
-
 1. Create your field-type file in `lib/base-chips/`.
 2. Add reference to `lib/base-chips/_base-chips.js`:
     ```js
@@ -276,4 +274,3 @@ require("./already-existing-field-type.js") // this is above your field-type
 require("./your-field-type.js"); // this is your field-type
 // some requires
 ```
-
