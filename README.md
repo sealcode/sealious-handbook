@@ -1,4 +1,63 @@
-## Field-Types
+## Simple Sealious app
+In this section we will learn how to create a simple Sealious app and what happens when we start it. Let's consider our [hello-world example](https://github.com/Sealious/hello-world):
+
+```js
+1   var Sealious = require("sealious"); 
+2
+3   Sealious.init();
+4
+5   new Sealious.ChipTypes.ResourceType({
+6   name: "person",
+7       fields: [
+8           {name: "name", type: "text", required: true},
+9           {name: "age", type: "int", required: true}
+10      ]
+11  });
+12
+13  Sealious.start();
+```
+
+This app consists of four parts:
+
+ * `var Sealious = require("sealious");` - a reference to Sealious,
+ * `Sealious.init();` - loads Sealious componenets,
+ * `new Sealious.ChipTypes.ResourceType({})` - defines a new resource-type that will be our data model,
+ * `Sealious.start();` - starts the server, prepares access routes, loads chips.
+
+This is all we need to start a new Sealious app.
+
+From now on we can communicate with the server through REST routes (the default Sealious channel):
+
+ * `GET` on url `api/v1/person` returns all `person` resources,
+ * `GET` on url `api/v1/person/{person_id}` returns a specific `person` resource
+ * `POST` on url `api/v1/person` with body `{name: <text>, age: <int>}` creates a new `person` resource with given body
+ * `PUT` and `PATCH` on url `api/v1/pe
+
+### Access Strategy
+
+#### I. What is an access strategy?
+Access strategies are functions that take a context as an argument and based on it either allow or deny access to certain resources or operations.
+
+#### II. How to use access strategies
+One of the possible ways to use an access strategy is when defining a new `resource`.
+
+```js
+    new Sealious.ResourceType({
+        name: "nobody_can_update_me",
+        fields: [{  name: "value", type: "text" }],
+        access_strategy: {
+            update: "noone"
+        }
+    });
+```
+
+#### III. Access strategies in Sealious
+
+#### IV. Creating a new access strategy
+
+#### V. Common questions and errors
+
+### Field-Types
 
 #### I. What are field-types?
 Each "field" in a ResourceType must have a field-type assigned. Field-types describe which values can and which cannot be assigned to a field. Field-type's behaviour can be adjusted using field-type parameters.
@@ -6,8 +65,6 @@ Each "field" in a ResourceType must have a field-type assigned. Field-types desc
 A field-type can accept or reject a value, with appropriate error message.
 
 It's a field-type's responsibility to describe how to store it's values in a datatore.
-
-File `lib/base-chips/_base-chips.js` defines the order of field-type initilizing.
 
 #### II. How to use field-types?
 The example below shows a simple Sealious app:
@@ -72,7 +129,8 @@ because of the fields defined in our app.
 Sending this request will result in adding a new user named **Maurice**, who is **21** years old and has **blue** hair color to the database.
 
 #### III. Field-types in Sealious
-Sealious comes with *eleven* pre-defined field-types:
+Sealious comes with *eleven* pre-defined field-types. that are located in `lib/base_chips`.
+File `lib/base-chips/_base-chips.js` defines the order of field-type initilizing.
 
 1. Boolean 
     * boolean value: `true` or `false`,
