@@ -20,9 +20,9 @@ In this section we will learn how to create a simple Sealious app and what happe
 This app consists of four parts:
 
  * `var Sealious = require("sealious");` - a reference to Sealious,
- * `Sealious.init();` - loads Sealious componenets,
+ * `Sealious.init();` - loads Sealious components,
  * `new Sealious.ChipTypes.ResourceType({})` - defines a new resource-type that will be our data model,
- * `Sealious.start();` - starts the server, prepares access routes, loads chips.
+ * `Sealious.start();` - starts the server, prepares REST routes, loads chips.
 
 This is all we need to start a new Sealious app.
 
@@ -43,7 +43,7 @@ From now on we can communicate with the server through REST routes (the default 
 
 ---
 
-**Q**: *I have **no** idea what's happening in this ResourceType thing...*
+**Q**: *I have no idea what's happening in this ResourceType thing...*
 
 **A**: Let's walk through it step by step:
 
