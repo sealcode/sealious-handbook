@@ -1,5 +1,15 @@
 ## Simple Sealious app
-In this section we will learn how to create a simple Sealious app and what happens when we start it. Let's consider our [hello-world example](https://github.com/Sealious/hello-world):
+In this section we will learn how to create a Sealious app.
+
+Our app will 
+
+### Declaring our first ResourceType
+
+ResourceType is the core concept of Sealious. Without it, Sealious has nothing to work on.
+
+Let's create a new resource named `person`.
+
+In real world, a person must have a name and some age. Here's how we'll represent it in Sealious:
 
 ```js
 1   var Sealious = require("sealious"); 
@@ -59,11 +69,11 @@ If you want to know more about `ResourceType`, see X.
 
 If you want to know more about `FieldType`, see X.
 
----
+### Adding more resources
 
-**Q**: *How can I add another resource, let's say `animal`?*
+You can add as many resources as you need. In our example, we'll add `animal` resource.
 
-**A**: You need to declare another resource-type in our app:
+
 
 ```js
 1   var Sealious = require("sealious"); 
@@ -104,7 +114,7 @@ Now if you start the server, the REST routes are prepare to handle URLs with `an
 ### Access Strategy
 
 #### I. What is an access strategy?
-Access strategies are functions that take a context as an argument and based on it either allow or deny access to certain resources or operations.
+Access strategy is a function that takes a context as an argument and based on it either allows or denies access to certain resources or operations.
 
 #### II. How to use access strategies
 One of the possible ways to use an access strategy is when defining a new `resource`.
@@ -119,7 +129,19 @@ One of the possible ways to use an access strategy is when defining a new `resou
     });
 ```
 
+In this example we use Access Strategy `noone` that rejects any `update` request.
+
 #### III. Access strategies in Sealious
+Sealious comes with *three* pre-defined access strategies. that are located in `lib/base_chips`.
+File `lib/base-chips/_base-chips.js` defines the order of access strategies initilizing.
+
+1. Just owner:
+    * only the owner of the resource can modify it
+2. Noone:
+    * noone can modify the resource
+3. Public:
+    * Everybody has access to the resource.
+
 
 #### IV. Creating a new access strategy
 
