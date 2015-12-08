@@ -7,7 +7,7 @@ In this section we will learn how to create a simple Sealious app and what happe
 3   Sealious.init();
 4
 5   new Sealious.ChipTypes.ResourceType({
-6   name: "person",
+6       name: "person",
 7       fields: [
 8           {name: "name", type: "text", required: true},
 9           {name: "age", type: "int", required: true}
@@ -28,10 +28,78 @@ This is all we need to start a new Sealious app.
 
 From now on we can communicate with the server through REST routes (the default Sealious channel):
 
- * `GET` on url `api/v1/person` returns all `person` resources,
- * `GET` on url `api/v1/person/{person_id}` returns a specific `person` resource
- * `POST` on url `api/v1/person` with body `{name: <text>, age: <int>}` creates a new `person` resource with given body
- * `PUT` and `PATCH` on url `api/v1/pe
+ * `GET` on URL `api/v1/person` returns all `person` resources,
+ * `GET` on URL `api/v1/person/{person_id}` returns a specific `person` resource
+ * `POST` on URL `api/v1/person` with body `{name: <text>, age: <int>}` creates a new `person` resource with given body
+ * `PUT` and `PATCH` on URL `api/v1/person/{person_id}` with body `{name: <text>, age: <int>}` modifies the `person` resource
+ * `DELETE` on URL `api/v1/person/{person_id}` deletes a specific `person` resource
+
+
+---
+
+**Q**: *How can I communicate with the server if I don't want to use REST?*
+
+**A**: We give the developers channel REST by default. If you want to use other channel you are free to write one yourself. See X for more information.
+
+---
+
+**Q**: *I have **no** idea what's happening in this ResourceType thing...*
+
+**A**: Let's walk through it step by step:
+
+1. `new Sealious.ChipTypes.ResourceType({` - this line creates a new `ResourceType` object. You don't need to assign it to any variable, Sealious detects it automatically.
+2. `name: "person",` - this is the name of our resource, that we can work with.
+3. `fields: [` - we define `fields` array that holds information about what type of data our resource can store.
+4. `{name: "name", type: "text", required: true},` - this is the field used by our resource. The name of the field is `name`, its type is `text` and it must be delcared (`required: true`).
+5. `{name: "age", type: "int", required: true}` - this is the another field used by our resource. The name of the fields is `age`, its type is `int` and it must be declared (`required: true`).
+
+And that's it.
+
+If you want to know more about `ResourceType`, see X.
+
+If you want to know more about `FieldType`, see X.
+
+---
+
+**Q**: *How can I add another resource, let's say `animal`?*
+
+**A**: You need to declare another resource-type in our app:
+
+```js
+1   var Sealious = require("sealious"); 
+2
+3   Sealious.init();
+4
+5   new Sealious.ChipTypes.ResourceType({
+6       name: "person",
+7       fields: [
+8           {name: "name", type: "text", required: true},
+9           {name: "age", type: "int", required: true}
+10      ]
+11  });
+12
+13  new Sealious.ChipTypes.ResourceType({
+14      name: "animal",
+15      fields: [
+16          {name: "species", type: "text", required: true},
+17          {name: "name", type: "text", required: true},
+18          {name: "age", type: "int", required: true},
+19      ]
+20  });
+21
+22  Sealious.start();
+```
+
+As you can see, the `animal` resource has three fields:
+
+1. `spieces`,
+2. `name`,
+3. `age`.
+
+
+Now if you start the server, the REST routes are prepare to handle URLs with `animal` resource.
+
+
 
 ### Access Strategy
 
@@ -109,14 +177,11 @@ Every field can have `params` object to specify what values can be accepted and 
 
 **Q**: *But how can I actually use those field-types?*
 
-**A**: Good question. Let's take a look at line **14**:
+**A**: Good question.
 
-```js
-14  Sealious.ChipManager.get_chip("channel", "rest").set_url_base("/api/v1");
-```
+Sealious uses channel REST by default. You can send HTTP request on URL `http://localhost/api/v1/<resource_name>`. In our case, `<resource_name>` is `person`.
 
-This line tells us, that you can send HTTP requests on url `/api/v1`. 
-This means that you can send, for example, HTTP POST request on (deafult) URL `http://localhost/api/v1/person` with body:
+This means that you can send, for example, HTTP POST request on URL `http://localhost/api/v1/person` with body:
 
  * `name: Maurice`,
  * `age: 21`,
