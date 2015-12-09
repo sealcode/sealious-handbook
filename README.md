@@ -1,7 +1,37 @@
 ## Simple Sealious app
-In this section we will learn how to create a Sealious app.
+In this section we will show you how to create a fully functional and working back-end application, with REST routes and database handling set. 
 
-Our app will 
+In just 20 - TO BE UPDATES - lines.
+
+```js
+1   var Sealious = require("sealious"); 
+2
+3   Sealious.init();
+4
+5   require("./field-type.animal.js");
+6
+7   new Sealious.ChipTypes.ResourceType({
+8       name: "owner",
+9       fields: [
+10          {name: "first-name", type: "text", required: true},
+11          {name: "last-name", type: "text", required: true},
+12          {name: "address", type: "text", required: true},
+13          {name: "phone-number", type: "int", required: true}
+14          {name: "email", type: "email"}
+15      ]
+16  });
+17
+18  new Sealious.ChipTypes.ResourceType({
+19      name: "pet",
+20      fields: [
+21          {name: "species", type: "animal", required: true},
+22          {name: "name", type: "text", required: true},
+23          {name: "age", type: "int", required: true},
+24     ]
+25  });
+26
+27  Sealious.start();
+```
 
 ### Declaring our first ResourceType
 
@@ -73,8 +103,6 @@ If you want to know more about `FieldType`, see X.
 
 You can add as many resources as you need. In our example, we'll add `animal` resource.
 
-
-
 ```js
 1   var Sealious = require("sealious"); 
 2
@@ -107,9 +135,9 @@ As you can see, the `animal` resource has three fields:
 3. `age`.
 
 
-Now if you start the server, the REST routes are prepare to handle URLs with `animal` resource.
+Now if you start the server, the REST routes are prepared to handle URLs with `animal` resource.
 
-
+## Sealious base chips
 
 ### Access Strategy
 
