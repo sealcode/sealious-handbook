@@ -39,7 +39,7 @@ ResourceType is the core concept of Sealious. Without it, Sealious has nothing t
 
 Let's create a new resource named `person`.
 
-In real world, a person must have a name and some age. Here's how we'll represent it in Sealious:
+In the real world, a person must have a name and some age. Here's how we'll represent it in Sealious:
 
 ```js
 1   var Sealious = require("sealious"); 
@@ -135,7 +135,7 @@ As you can see, the `animal` resource has three fields:
 3. `age`.
 
 
-Now if you start the server, the REST routes are prepared to handle URLs with `animal` resource.
+Now if you start the server, the REST routes are prepared to handle URLs with `animal` resource **and** the database is set to handle your queries.
 
 ## Sealious base chips
 
