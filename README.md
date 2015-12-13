@@ -1,5 +1,5 @@
 ## Simple Sealious app
-In this section we will show you how to create a fully functional and working back-end application, with REST routes and database handling set. 
+In this section we will show you how to create a fully functional and working back-end application, with REST routes and database handling set.
 
 In just 20 - TO BE UPDATES - lines.
 
