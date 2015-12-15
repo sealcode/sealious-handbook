@@ -126,7 +126,7 @@ If you want to know more about `FieldType`, see X.
 
 ### Adding more resources
 
-You can add as many resources as you need. In our example, we'll add `animal` resource.
+You can add as many resources as you need. In our example, we'll add `pet` resource.
 
 ```js
 1   var Sealious = require("sealious"); 
