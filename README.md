@@ -93,10 +93,10 @@ This is all we need to start a new Sealious app.
 From now on we can communicate with the server through REST routes (the default Sealious channel):
 
  * `GET` on URL `api/v1/owner` returns all `owner` resources,
- * `GET` on URL `api/v1/owner/{owner_id}` returns a specific `owner` resource
- * `POST` on URL `api/v1/owner` with body `{name: <text>, age: <int>}` creates a new `owner` resource with given body
- * `PUT` and `PATCH` on URL `api/v1/owner/{owner_id}` with body `{name: <text>, age: <int>}` modifies the `owner` resource
- * `DELETE` on URL `api/v1/owner/{owner_id}` deletes a specific `owner` resource
+ * `GET` on URL `api/v1/owner/{owner_id}` returns a specific `owner` resource,
+ * `POST` on URL `api/v1/owner` with body `{name: <text>, age: <int>}` creates a new `owner` resource with given body,
+ * `PUT` and `PATCH` on URL `api/v1/owner/{owner_id}` with body `{name: <text>, age: <int>}` modifies the `owner` resource,
+ * `DELETE` on URL `api/v1/owner/{owner_id}` deletes a specific `owner` resource.
 
 
 ---
