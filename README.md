@@ -13,7 +13,17 @@ Promotor: prof. dr hab. Marek Nawrocki
     * [Final result](https://github.com/Sealious/sealious-handbook#final-result)
 3. [Base chips](https://github.com/Sealious/sealious-handbook#sealious-base-chips)
     * [Access Strategy](https://github.com/Sealious/sealious-handbook#access-strategy)
+        * [What is an access strategy](https://github.com/Sealious/sealious-handbook#i-what-is-an-access-strategy)
+        * [How to use access strategies](https://github.com/Sealious/sealious-handbook#ii-how-to-use-access-strategies)
+        * [Access strategies in Sealious](https://github.com/Sealious/sealious-handbook#iii-access-strategies-in-sealious)
+        * [Creating a new access strategy](https://github.com/Sealious/sealious-handbook#iv-creating-a-new-access-strategy)
+        * [Common questions and errors](https://github.com/Sealious/sealious-handbook#v-common-questions-and-errors)
     * [Field Types](https://github.com/Sealious/sealious-handbook#field-types)
+        * [What are field types](https://github.com/Sealious/sealious-handbook#i-what-are-field-types)
+        * [How to use field types](https://github.com/Sealious/sealious-handbook#ii-how-to-use-field-types)
+        * [Field types in Sealious](https://github.com/Sealious/sealious-handbook#iii-field-types-in-sealious)
+        * [Creating a new field type](https://github.com/Sealious/sealious-handbook#iv-creating-a-new-field-type)
+        * [Common questions and errors](https://github.com/Sealious/sealious-handbook#v-common-questions-and-errors-1)
 
 ## Getting started
 *Before starting your journey with Sealious, make sure [Node.js](https://nodejs.org/en/) is installed and set. Also we'll be using [MongoDB](https://www.mongodb.org/) in our examples.*
@@ -284,14 +294,14 @@ File `lib/base-chips/_base-chips.js` defines the order of access strategies init
 
 ### Field-Types
 
-#### I. What are field-types?
+#### I. What are field types?
 Each "field" in a ResourceType must have a field-type assigned. Field-types describe which values can and which cannot be assigned to a field. Field-type's behaviour can be adjusted using field-type parameters.
 
 A field-type can accept or reject a value, with appropriate error message.
 
 It's a field-type's responsibility to describe how to store it's values in a datatore.
 
-#### II. How to use field-types?
+#### II. How to use field types?
 The example below shows a simple Sealious app:
 ```js
 1   var Sealious = require("sealious");
@@ -350,7 +360,7 @@ because of the fields defined in our app.
 
 Sending this request will result in adding a new user named **Maurice**, who is **21** years old and has **blue** hair color to the database.
 
-#### III. Field-types in Sealious
+#### III. Field types in Sealious
 Sealious comes with *eleven* pre-defined field-types. that are located in `lib/base_chips`.
 File `lib/base-chips/_base-chips.js` defines the order of field-type initilizing.
 
@@ -385,7 +395,7 @@ File `lib/base-chips/_base-chips.js` defines the order of field-type initilizing
     * can specify maximum string length,
     * can specify minimum string length.
 
-#### IV. Creating a new field-type
+#### IV. Creating a new field type
 In this section we will show you step by step how to create your own field-type.
 We will use `field-type.color` for this example.
 
