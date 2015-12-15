@@ -1,3 +1,9 @@
+Poniższy tekst jest częścią pracy dyplomowej Adriana Wydmańskiego. 
+
+Uniwersytet Adama Mickiewicz w Poznaniu
+Wydział Matematyki i Informatyki.
+Promotor: prof. dr hab. Marek Nawrocki
+
 ## Simple Sealious app
 In this section we will show you how to create a fully functional and working back-end application, with REST routes and database handling set. 
 
@@ -24,7 +30,7 @@ In just 20 - TO BE UPDATES - lines.
 18  new Sealious.ChipTypes.ResourceType({
 19      name: "pet",
 20      fields: [
-21          {name: "species", type: "animal", required: true},
+21          {name: "species", type: "animald", required: true},
 22          {name: "name", type: "text", required: true},
 23          {name: "age", type: "int", required: true},
 24     ]
