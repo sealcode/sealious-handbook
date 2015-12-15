@@ -170,7 +170,7 @@ And that's it. We've finished our **Veterinarian Clinic**!
 
 ---
 
-**Q**: *But wait, the first code block you showed us had line `require("./field-type.animal.js");`. What's with this?
+**Q**: *But wait, the first code block you showed us had line `require("./field-type.animal.js");`. What's with this?*
 
 **A**: Nice eye. Here's the explanation:
 
