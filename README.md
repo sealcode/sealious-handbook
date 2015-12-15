@@ -7,7 +7,7 @@ Promotor: prof. dr hab. Marek Nawrocki
 ##Table of contents
 
 1. [Getting started](https://github.com/Sealious/sealious-handbook#getting-started)
-    *[Declaring our first ResourceType](https://github.com/Sealious/sealious-handbook#declaring-our-first-resourcetype)
+    * [Declaring our first ResourceType](https://github.com/Sealious/sealious-handbook#declaring-our-first-resourcetype)
 2. [Sample Sealious app](https://github.com/Sealious/sealious-handbook#simple-sealious-app)
 3. [Base chips](https://github.com/Sealious/sealious-handbook#sealious-base-chips)
     * [Access Strategy](https://github.com/Sealious/sealious-handbook#access-strategy)
