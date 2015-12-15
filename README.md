@@ -141,9 +141,7 @@ From now on we can communicate with the server through REST routes (the default 
 
 And that's it.
 
-If you want to know more about `ResourceType`, see X.
-
-If you want to know more about `FieldType`, see X.
+If you want to know more about `FieldType`, click [here](https://github.com/Sealious/sealious-handbook#field-types).
 
 ### Adding more resources
 
@@ -216,7 +214,7 @@ For our example, we've defined a new field-type, that checks if given animal spe
 14  });
 ```
 
-If you want to know more about `FieldType`, see X.
+If you want to know more about `FieldType`, click [here](https://github.com/Sealious/sealious-handbook#field-types).
 
 Now if we include our newly created field-type, we can check what's the spieces of the pet we want to add to our resources.
 
