@@ -8,6 +8,7 @@ Promotor: prof. dr hab. Marek Nawrocki
 
 1. [Getting started](https://github.com/Sealious/sealious-handbook#getting-started)
     * [Declaring our first ResourceType](https://github.com/Sealious/sealious-handbook#declaring-our-first-resourcetype)
+    * [Adding more resources](https://github.com/Sealious/sealious-handbook#adding-more-resources)
 2. [Sample Sealious app](https://github.com/Sealious/sealious-handbook#simple-sealious-app)
 3. [Base chips](https://github.com/Sealious/sealious-handbook#sealious-base-chips)
     * [Access Strategy](https://github.com/Sealious/sealious-handbook#access-strategy)
@@ -209,7 +210,7 @@ If you want to know more about `FieldType`, see X.
 Now if we include our newly created field-type, we can check what's the spieces of the pet we want to add to our resources.
 
 
-Final result:
+### Final result:
 ```js
 1   var Sealious = require("sealious"); 
 2
