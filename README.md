@@ -9,6 +9,8 @@ Promotor: prof. dr hab. Marek Nawrocki
 1. [Getting started](https://github.com/Sealious/sealious-handbook#getting-started)
 2. [Sample Sealious app](https://github.com/Sealious/sealious-handbook#simple-sealious-app)
 3. [Base chips](https://github.com/Sealious/sealious-handbook#sealious-base-chips)
+    * [Access Strategy](https://github.com/Sealious/sealious-handbook#access-strategy)
+    * [Field Types](https://github.com/Sealious/sealious-handbook#field-types)
 
 ## Getting started
 *Before starting your journey with Sealious, make sure [Node.js](https://nodejs.org/en/) is installed and set. Also we'll be using [MongoDB](https://www.mongodb.org/) in our examples.*
